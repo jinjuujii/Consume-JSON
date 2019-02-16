@@ -23,6 +23,10 @@ public class JsonIntoDbApplication {
 		SpringApplication.run(JsonIntoDbApplication.class, args);
 		
 		RestTemplate restTemplate = new RestTemplate(); 
+		
+		//this URL explains how this work. Kinda confusing for me. 
+		//https://stackoverflow.com/questions/23674046/get-list-of-json-objects-with-spring-resttemplate
+		
 		ResponseEntity<List<User>> userResponse = restTemplate.exchange(
 				"https://jsonplaceholder.typicode.com/users",
 				HttpMethod.GET, null, 
