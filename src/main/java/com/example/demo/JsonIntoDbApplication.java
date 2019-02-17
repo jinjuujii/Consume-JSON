@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
@@ -27,14 +28,19 @@ public class JsonIntoDbApplication {
 		//this URL explains how this work. Kinda confusing for me. 
 		//https://stackoverflow.com/questions/23674046/get-list-of-json-objects-with-spring-resttemplate
 		
-		ResponseEntity<List<User>> userResponse = restTemplate.exchange(
-				"https://jsonplaceholder.typicode.com/users",
-				HttpMethod.GET, null, 
-				new  ParameterizedTypeReference<List<User>>() {});
+		/*THIS WORKS
+		 * ResponseEntity<List<User>> userResponse = restTemplate.exchange(
+		 * "https://jsonplaceholder.typicode.com/users", HttpMethod.GET, null, new
+		 * ParameterizedTypeReference<List<User>>() {});
+		 * 
+		 * List<User> userlists = userResponse.getBody();
+		 * System.out.println(userlists.toString());
+		 */
 		
-		List<User> userlists = userResponse.getBody();
+		//THIS ALSO WORKS
+		User[] users = restTemplate.getForObject("https://jsonplaceholder.typicode.com/users", User[].class);
+		List<User> userlists = Arrays.asList(users);
 		System.out.println(userlists.toString());
-		
 		
 				
  
