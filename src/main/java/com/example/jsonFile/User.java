@@ -1,19 +1,49 @@
 package com.example.jsonFile;
 
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import antlr.collections.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
+@Table(name = "users_table")
 public class User {
 
+	@Id
+	@GeneratedValue
 	private Long id;
+	
 	private String name;
 	private String username;
 	private String email;
+	
+	@Embedded
 	private Address address;
 	private String phone;
 	private String website;
+	
+	public User(Long id, String name, String username, String email, Address address, String phone, String website,
+			Company company) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.website = website;
+		this.company = company;
+	}
+	
+	
+
+	@Embedded
 	private Company company;
 
 	public Long getId() {

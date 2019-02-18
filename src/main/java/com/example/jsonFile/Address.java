@@ -1,15 +1,28 @@
 package com.example.jsonFile;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties (ignoreUnknown=true)
-
+@Embeddable
 public class Address {
 
 	String street;
 	String suite;
 	String city;
 	String zipcode;
+	
+	public Address(String street, String suite, String city, String zipcode, Geo geo) {
+		super();
+		this.street = street;
+		this.suite = suite;
+		this.city = city;
+		this.zipcode = zipcode;
+		this.geo = geo;
+	}
+	@Embedded
 	Geo geo;
 	
 	
